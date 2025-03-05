@@ -1,0 +1,124 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  a {
+    text-decoration: none;
+    color: orange;
+  }
+  
+  /* Container */
+  .forgot-password-container {
+    background: #111; /* Slightly lighter black for contrast */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    width: 400px;
+    text-align: center;
+  }
+  
+  /* Header */
+  header h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  header .highlight {
+    background: orange;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  /* Form Section */
+  .forgot-password-form h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .forgot-password-form p {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 20px;
+  }
+  
+  .forgot-password-form label {
+    font-size: 14px;
+    color: orange;
+    margin-bottom: 5px;
+    display: block;
+    text-align: left;
+  }
+  
+  .forgot-password-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background: #222;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .forgot-password-form input:focus {
+    outline: none;
+    border-color: orange;
+    box-shadow: 0 0 5px orange;
+  }
+  
+  .forgot-password-form input::placeholder {
+    color: #aaa;
+  }
+  
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    background: orange;
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-bottom: 10px;
+  }
+  
+  .btn:hover {
+    background: #ff9500;
+  }
+  
+  .btn-secondary {
+    background: #333;
+    color: orange;
+    border: 1px solid orange;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  
+  .btn-secondary:hover {
+    background: orange;
+    color: #000;
+  }
+  
