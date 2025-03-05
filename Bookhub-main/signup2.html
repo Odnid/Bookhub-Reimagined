@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Hub - Create Account</title>
+  <link rel="stylesheet" href="assets/css/signup2.css">
+  <link rel="icon" href="assets/img/bookhub.png">
+</head>
+<body>
+  <div class="account-container">
+    <!-- Header Section -->
+    <header>
+      <h1>Book <span class="highlight">hub</span></h1>
+    </header>
+
+    <!-- Account Creation Form -->
+    <form action="dashboard.html" class="account-form">
+      <!-- Year and Section -->
+      <label for="year-section">Year and Section:</label>
+      <input type="text" id="year-section" name="year-section" placeholder="Year and Section" required>
+
+      <!-- Program -->
+      <label for="program">Program:</label>
+      <select id="program" name="program" required>
+        <option value="" disabled selected>Select Program</option>
+        <option value="program1">Program 1</option>
+        <option value="program2">Program 2</option>
+        <option value="program3">Program 3</option>
+      </select>
+
+      <!-- Create Account Button -->
+      <button type="submit" class="btn">Create Account</button>
+
+      <!-- Footer Links -->
+      <div class="footer-links">
+        <p>Already have an Account? <a href="#">Back to Login</a></p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

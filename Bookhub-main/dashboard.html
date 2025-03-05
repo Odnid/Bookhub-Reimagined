@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <title>Book Hub - Dashboard</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+  <link rel="icon" href="assets/img/bookhub.png">
+</head>
+<body>
+  <div class="container">
+     <!-- Sidebar Toggle -->
+     <button class="hamburger-menu">
+      <i class="bi bi-list"></i>
+    </button>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <h1>
+            <i class="bi bi-book-half"></i>
+            Book <span class="highlight">hub</span>
+          </h1>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="dashboard.html" class="active">
+              <i class="bi bi-grid-1x2-fill"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="books.html">
+              <i class="bi bi-book"></i>
+              <span>Books</span>
+            </a>
+          </li>
+          <li>
+            <a href="library.html">
+              <i class="bi bi-building"></i>
+              <span>Library</span>
+            </a>
+          </li>
+          <li>
+            <a href="favorites.html">
+              <i class="bi bi-heart"></i>
+              <span>Favorites</span>
+            </a>
+          </li>
+          <li>
+            <a href="profile.html">
+              <i class="bi bi-person"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="aboutus.html">
+              <i class="bi bi-info-circle"></i>
+              <span>About Us</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="logout">
+        <button id="logoutBtn">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-header">
+        <div class="header-left">
+          <h2>Welcome back, John! 👋</h2>
+          <p class="subtitle">Here's what's happening with your library today.</p>
+        </div>
+        <div class="header-right">
+          <div class="search-bar">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="Search books, authors...">
+          </div>
+          <div class="user-menu">
+            <span class="notification-count">1</span>
+            <i class="bi bi-bell notification-icon"></i>
+            <img src="assets\img\Odnid.jpg" alt="User" class="user-avatar">
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-book"></i>
+          </div>
+          <div class="stat-info">
+            <h4>Total Books</h4>
+            <h3>248</h3>
+            <span class="stat-trend positive">
+              <i class="bi bi-arrow-up-short"></i>
+              12% from last month
+            </span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-people"></i>
+          </div>
+          <div class="stat-info">
+            <h4>Active Members</h4>
+            <h3>156</h3>
+            <span class="stat-trend positive">
+              8% from last month
+            </span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-arrow-left-right"></i>
+          </div>
+          <div class="stat-info">
+            <h4>Books Borrowed</h4>
+            <h3>45</h3>
+            <span class="stat-trend negative">
+              3% from last month
+            </span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-clock"></i>
+          </div>
+          <div class="stat-info">
+            <h4>Books Overdue</h4>
+            <h3>12</h3>
+            <span class="stat-trend neutral">
+              No change
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-bottom">
+        <!-- Recent Activity Section -->
+        <div class="recent-activity">
+          <div class="section-header">
+            <h3>Recent Activity</h3>
+            <a href="#" class="view-all">View All</a>
+          </div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-icon book">
+                <i class="bi bi-book"></i>
+              </div>
+              <div class="activity-details">
+                <h4>The Great Gatsby</h4>
+                <p>Borrowed by <span>Sarah Wilson</span></p>
+                <small>2 hours ago</small>
+              </div>
+              <span class="status borrowed">Borrowed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions Section -->
+        <div class="quick-actions">
+          <h3>Quick Actions</h3>
+          <div class="action-grid">
+            <button class="action-card">
+              <i class="bi bi-plus-circle"></i>
+              <span>Add New Book</span>
+            </button>
+            <button class="action-card">
+              <i class="bi bi-person-plus"></i>
+              <span>Register Member</span>
+            </button>
+            <button class="action-card">
+              <i class="bi bi-arrow-left-right"></i>
+              <span>Issue Book</span>
+            </button>
+            <button class="action-card">
+              <i class="bi bi-search"></i>
+              <span>Find Book</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      window.location.href = 'login.html';
+    });
+
+    // Search functionality
+    const searchInput = document.querySelector('.search-bar input');
+    searchInput.addEventListener('input', function(e) {
+      // Implement search functionality
+      console.log('Searching for:', e.target.value);
+    });
+
+    // Add smooth animations for stat cards
+    document.addEventListener('DOMContentLoaded', function() {
+      const statCards = document.querySelectorAll('.stat-card');
+      statCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('animate');
+        }, index * 100);
+      });
+    });
+
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.querySelector('.hamburger-menu');
+      const sidebar = document.querySelector('.sidebar');
+
+      hamburger.addEventListener('click', function() {
+        sidebar.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
