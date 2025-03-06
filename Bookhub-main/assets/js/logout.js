@@ -39,6 +39,12 @@ function createLogoutModal() {
 // Initialize logout functionality
 document.addEventListener('DOMContentLoaded', function() {
     const logoutBtn = document.getElementById('logoutBtn');
+    
+    if (!logoutBtn) {
+        console.error('Logout button not found!');
+        return;
+    }
+    
     const modal = createLogoutModal();
 
     logoutBtn.addEventListener('click', function(e) {
