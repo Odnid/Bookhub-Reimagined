@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <title>Book Hub - Profile</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+  <link rel="icon" href="assets/img/bookhub.png">
+  <style>
+    .profile-content {
+      padding: 30px;
+    }
+
+    .profile-header {
+      background: #2a2a2a;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .profile-pic-container {
+      position: relative;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #ff9500;
+      object-fit: cover;
+    }
+
+    .edit-pic {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: #ff9500;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #000;
+      font-size: 1.2rem;
+    }
+
+    .profile-info h2 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+
+    .tagline {
+      color: #aaa;
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat-card i {
+      font-size: 2rem;
+      color: #ff9500;
+      margin-bottom: 10px;
+    }
+
+    .stat-card h3 {
+      color: #fff;
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    .stat-card p {
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .profile-details {
+      background: #2a2a2a;
+      border-radius: 15px;
+      padding: 30px;
+    }
+
+    .details-section {
+      margin-bottom: 25px;
+    }
+
+    .details-section h3 {
+      color: #ff9500;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .details-section p {
+      color: #fff;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .details-section i {
+      color: #ff9500;
+      width: 20px;
+    }
+
+    .profile-actions {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #ff9500;
+      color: #000;
+    }
+
+    .btn-secondary {
+      background: #444;
+      color: #fff;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar Toggle -->
+    <button class="hamburger-menu">
+      <i class="bi bi-list"></i>
+    </button>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <h1>
+            <i class="bi bi-book-half"></i>
+            Book <span class="highlight">hub</span>
+          </h1>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="dashboard.html">
+              <i class="bi bi-grid-1x2-fill"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="books.html">
+              <i class="bi bi-book"></i>
+              <span>Books</span>
+            </a>
+          </li>
+          <li>
+            <a href="library.html">
+              <i class="bi bi-building"></i>
+              <span>Library</span>
+            </a>
+          </li>
+          <li>
+            <a href="favorites.html">
+              <i class="bi bi-heart"></i>
+              <span>Favorites</span>
+            </a>
+          </li>
+          <li>
+            <a href="profile.html" class="active">
+              <i class="bi bi-person"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="aboutus.html">
+              <i class="bi bi-info-circle"></i>
+              <span>About Us</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="logout">
+        <button id="logoutBtn">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-header">
+        <div class="header-left">
+          <h2>Profile Settings</h2>
+          <p class="subtitle">Manage your account and preferences</p>
+        </div>
+        <div class="header-right">
+          <div class="user-menu">
+            <span class="notification-count">1</span>
+            <i class="bi bi-bell notification-icon"></i>
+            <img src="assets\img\Odnid.jpg" alt="User" class="user-avatar">
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-content">
+        <!-- Profile Header -->
+        <div class="profile-header">
+          <div class="profile-pic-container">
+            <img src="assets\img\Odnid.jpg" alt="Profile Picture" class="profile-pic">
+            <button class="edit-pic">
+              <i class="bi bi-camera"></i>
+            </button>
+          </div>
+          <div class="profile-info">
+            <h2>John Doe</h2>
+            <p class="tagline">Book Enthusiast | Member since 2024</p>
+          </div>
+        </div>
+
+        <!-- Profile Stats -->
+        <div class="profile-stats">
+          <div class="stat-card">
+            <i class="bi bi-book"></i>
+            <h3>42</h3>
+            <p>Books Read</p>
+          </div>
+          <div class="stat-card">
+            <i class="bi bi-heart"></i>
+            <h3>15</h3>
+            <p>Favorites</p>
+          </div>
+          <div class="stat-card">
+            <i class="bi bi-star"></i>
+            <h3>4.8</h3>
+            <p>Average Rating</p>
+          </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="profile-details">
+          <div class="details-section">
+            <h3><i class="bi bi-person-badge"></i> Personal Information</h3>
+            <p><i class="bi bi-envelope"></i> Email: john.doe@example.com</p>
+            <p><i class="bi bi-telephone"></i> Phone: +1 234 567 890</p>
+            <p><i class="bi bi-geo-alt"></i> Location: New York, USA</p>
+          </div>
+
+          <div class="details-section">
+            <h3><i class="bi bi-gear"></i> Preferences</h3>
+            <p><i class="bi bi-book"></i> Favorite Genre: Science Fiction</p>
+            <p><i class="bi bi-translate"></i> Language: English</p>
+            <p><i class="bi bi-bell"></i> Notifications: Enabled</p>
+          </div>
+
+          <div class="profile-actions">
+            <button class="btn btn-primary">
+              <i class="bi bi-pencil-square"></i>
+              Edit Profile
+            </button>
+            <button class="btn btn-secondary">
+              <i class="bi bi-shield-lock"></i>
+              Change Password
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+
+    // Sidebar toggle functionality
+    document.querySelector('.hamburger-menu').addEventListener('click', function() {
+      document.querySelector('.sidebar').classList.toggle('collapsed');
+      document.querySelector('.main-content').classList.toggle('expanded');
+    });
+  </script>
+</body>
+</html>

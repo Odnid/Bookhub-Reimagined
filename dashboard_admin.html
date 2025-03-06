@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Hub - Dashboard</title>
+  <link rel="stylesheet" href="assets/css/dashboard_admin.css">
+  <link rel="icon" href="assets/img/bookhub.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Add Chart.js -->
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h1>Book <span class="highlight">hub</span></h1>
+      <nav>
+        <ul>
+          <li class="active"><strong>Dashboard</strong></li>
+          <a href="usermanagement.html"><li><strong>User Management</strong></li></a>
+          <a href="bookstats.html"><li><strong>Book Statistics</strong></li></a>
+        </ul>
+      </nav>
+      <div class="logout">
+        <button id="logoutButton"><strong>Logout</strong></button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+      <section class="stats">
+        <div class="stat-box">
+          <h3>Most Popular Book</h3>
+          <p>The 100</p>
+        </div>
+        <div class="stat-box">
+          <h3>Total Books in Library</h3>
+          <p>30</p>
+        </div>
+        <div class="stat-box">
+          <h3>No. Of Borrowers</h3>
+          <p>3</p>
+        </div>
+      </section>
+
+      <!-- Line Chart Section -->
+      <section class="chart">
+        <canvas id="lineChart" width="900" height="400"></canvas>
+      </section>
+    </main>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Are you sure you want to log out?</h2>
+      <div class="modal-buttons">
+        <button id="cancelLogout" class="cancel-btn">Cancel</button>
+        <a href="login.html"><button class="confirm-btn">Log Out</button></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get the modal and buttons
+    var modal = document.getElementById("logoutModal");
+    var logoutButton = document.getElementById("logoutButton");
+    var cancelButton = document.getElementById("cancelLogout");
+    var closeModal = document.querySelector(".close");
+
+    // When the user clicks the logout button, show the modal
+    logoutButton.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeModal.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks "Cancel", close the modal
+    cancelButton.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks outside the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    const ctx = document.getElementById('lineChart').getContext('2d');
+const lineChart = new Chart(ctx, {
+  type: 'line', // Chart type
+  data: {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'], // X-axis labels
+    datasets: [
+      {
+        label: 'Books Borrowed Over Time', // First dataset label
+        data: [5, 10, 15, 20, 18, 25], // Y-axis data points for books borrowed
+        borderColor: 'orange', // Line color
+        backgroundColor: 'rgba(255, 165, 0, 0.2)', // Fill under the line
+        borderWidth: 2, // Line thickness
+        tension: 0.4, // Smoothness of the line
+      },
+      {
+        label: 'Books Returned Over Time', // Second dataset label
+        data: [5, 8, 12, 10, 25, 10], // Y-axis data points for books returned
+        borderColor: 'blue', // Line color for the second dataset
+        backgroundColor: 'rgba(0, 0, 255, 0.2)', // Fill under the line
+        borderWidth: 2, // Line thickness
+        tension: 0.4, // Smoothness of the line
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          color: '#fff' // Legend text color
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: '#fff' // X-axis label color
+        },
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        ticks: {
+          color: '#fff' // Y-axis label color
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)' // Grid line color
+        }
+      }
+    }
+  }
+});
+  </script>
+</body>
+</html>
