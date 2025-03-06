@@ -1,0 +1,107 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  a {
+    text-decoration: none;
+    color: orange;
+  }
+  
+  /* Container */
+  .account-container {
+    background: #111; /* Slightly lighter black for contrast */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    width: 400px;
+    text-align: center;
+  }
+  
+  /* Header */
+  header h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  header .highlight {
+    background: orange;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  /* Form Fields */
+  .account-form label {
+    font-size: 14px;
+    color: orange;
+    margin-bottom: 5px;
+    display: block;
+    text-align: left;
+  }
+  
+  .account-form input, .account-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background: #222;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .account-form input:focus, .account-form select:focus {
+    outline: none;
+    border-color: orange;
+    box-shadow: 0 0 5px orange;
+  }
+  
+  .account-form input::placeholder {
+    color: #aaa;
+  }
+  
+  /* Button */
+  .btn {
+    display: inline-block;
+    background: orange;
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .btn:hover {
+    background: #ff9500;
+  }
+  
+  /* Footer Links */
+  .footer-links {
+    margin-top: 15px;
+  }
+  
+  .footer-links a {
+    font-size: 14px;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+  }

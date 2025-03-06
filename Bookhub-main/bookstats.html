@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Hub - Book Statistics</title>
+  <link rel="stylesheet" href="assets/css/bookstats.css">
+  <link rel="icon" href="assets/img/bookhub.png">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h1>Book <span class="highlight">hub</span></h1>
+      <nav>
+        <ul>
+          <a href="dashboard_admin.html"><li><strong>Dashboard</strong></li></a>
+          <a href="usermanagement.html"><li><strong>User Management</strong></li></a>
+          <li class="active"><strong>Book Statistics</strong></li>
+        </ul>
+      </nav>
+      <div class="logout">
+        <button id="logoutButton"><strong>Logout</strong></button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <section class="stats">
+          <a href="numberofborrower.html"><div class="stat-box">
+            <p class="h3">Most Popular <br>Book</p>
+            <p>The 100</p>
+          </a></div>
+          <a href="bookglossary.html"><div class="stat-box">
+            <p class="h3">Total Books in Library</p>
+            <p>30</p>
+          </a></div>
+          <a href="numberofborrower.html"><div class="stat-box">
+            <p class="h3">No. Of Borrowers</p>
+            <p>3</p>
+          </a></div>
+        </section>
+      
+        <!-- Table and Chart Container -->
+        <section class="table-chart-container">
+          <!-- Table for User Details -->
+          <table class="user-table">
+            <thead>
+              <tr>
+                <th>Book ID</th>
+                <th>Book Name</th>
+                <th>Quantity</th>
+                <th>Author</th>
+                <th>Issued Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1111</td>
+                <td>Dindo 3000</td>
+                <td>2</td>
+                <td>Guillian Dawal</td>
+                <td>20/11/2024</td>
+              </tr>
+              <tr>
+                <td>1112</td>
+                <td>The 100</td>
+                <td>2</td>
+                <td>Kass Morgan</td>
+                <td>20/11/2024</td>
+              </tr>
+              <!-- Add more rows here as needed -->
+            </tbody>
+          </table>
+      
+          <!-- Chart Section -->
+          <div class="chart-section">
+            <div class="chart-container">
+              <canvas id="donutChart" width="150" height="150"></canvas>
+              <div class="chart-labels">
+                <p><span class="yellow"></span> Available Books</p>
+                <p><span class="red"></span> Borrowed Books</p>
+            </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Are you sure you want to log out?</h2>
+      <div class="modal-buttons">
+        <button id="cancelLogout" class="cancel-btn">Cancel</button>
+        <a href="login.html"><button class="confirm-btn">Log Out</button></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get the modal and buttons
+    var modal = document.getElementById("logoutModal");
+    var logoutButton = document.getElementById("logoutButton");
+    var cancelButton = document.getElementById("cancelLogout");
+    var closeModal = document.querySelector(".close");
+
+    // When the user clicks the logout button, show the modal
+    logoutButton.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeModal.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks "Cancel", close the modal
+    cancelButton.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks outside the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+  const canvas = document.getElementById("donutChart");
+  const ctx = canvas.getContext("2d");
+
+  // Data for the chart
+  const totalBooks = 30;
+  const borrowedBooks = 3;
+  const availableBooks = totalBooks - borrowedBooks;
+
+  const data = [availableBooks, borrowedBooks];
+  const colors = ["#ff9500", "red"]; // Colors for the slices
+
+  // Animation settings
+  const animationDuration = 1000; // Animation duration in milliseconds
+  const animationSteps = 60; // Number of animation frames
+  const interval = animationDuration / animationSteps; // Time between frames
+
+  let currentStep = 0;
+
+  // Function to draw the chart for the current progress
+  function drawChart(progress) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let startAngle = 0;
+
+    for (let i = 0; i < data.length; i++) {
+      const sliceValue = data[i];
+      const sliceAngle = (sliceValue / totalBooks) * 2 * Math.PI * progress;
+
+      // Draw the slice
+      ctx.beginPath();
+      ctx.moveTo(canvas.width / 2, canvas.height / 2);
+      ctx.arc(
+        canvas.width / 2,
+        canvas.height / 2,
+        canvas.width / 2,
+        startAngle,
+        startAngle + sliceAngle
+      );
+      ctx.closePath();
+      ctx.fillStyle = colors[i];
+      ctx.fill();
+
+      startAngle += sliceAngle;
+    }
+
+    // Draw the inner circle for the donut effect
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 4, 0, 2 * Math.PI);
+    ctx.fillStyle = "black"; // Inner circle color
+    ctx.fill();
+  }
+
+  // Animation loop
+  function animateChart() {
+    currentStep++;
+    const progress = currentStep / animationSteps;
+
+    drawChart(progress);
+
+    if (currentStep < animationSteps) {
+      requestAnimationFrame(animateChart);
+    }
+  }
+
+  // Start the animation
+  animateChart();
+});
+
+
+
+
+  </script>
+</body>
+</html>

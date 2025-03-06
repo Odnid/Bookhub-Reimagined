@@ -1,0 +1,80 @@
+/* General Reset */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Black background */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Genre Selection Container */
+  .genre-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .genre-box {
+    background: #333; /* Dark Gray Box */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    width: 400px;
+    text-align: center;
+  }
+  
+  .genre-box h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  /* Genre Grid */
+  .genre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .genre-grid label {
+    display: flex;
+    align-items: center;
+    background: #000;
+    padding: 10px;
+    border: 2px solid orange;
+    border-radius: 8px;
+    color: orange;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .genre-grid label:hover {
+    background: orange;
+    color: black;
+  }
+  
+  .genre-grid input {
+    margin-right: 10px;
+  }
+  
+  /* Submit Button */
+  button {
+    background: orange;
+    color: #000;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background: #ff9500;
+  }
+  

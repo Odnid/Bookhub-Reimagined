@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Hub - Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/dashboard_admin.css">
+  <link rel="icon" href="assets/img/bookhub.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <i class="bi bi-book-half"></i>
+        <h1>Book<span class="highlight">hub</span></h1>
+      </div>
+      <nav>
+        <ul>
+          <li class="active">
+            <a href="dashboard_admin.html">
+              <i class="bi bi-grid-1x2-fill"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="usermanagement.html">
+              <i class="bi bi-people-fill"></i>
+              <span>User Management</span>
+            </a>
+          </li>
+          <li>
+            <a href="bookstats.html">
+              <i class="bi bi-bar-chart-fill"></i>
+              <span>Book Statistics</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="logout">
+        <button id="logoutButton">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+      <header class="main-header">
+        <div class="header-content">
+          <h2>Welcome, Admin</h2>
+          <div class="date">
+            <i class="bi bi-calendar3"></i>
+            <span id="currentDate"></span>
+          </div>
+        </div>
+        <div class="search-bar">
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="Search books, users, or statistics...">
+        </div>
+      </header>
+
+      <section class="stats">
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="bi bi-book"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Most Popular Book</h3>
+            <p>The 100</p>
+            <span class="trend positive">
+              <i class="bi bi-arrow-up-right"></i>
+              12% increase
+            </span>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="bi bi-collection"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Total Books</h3>
+            <p>30</p>
+            <span class="trend positive">
+              <i class="bi bi-arrow-up-right"></i>
+              5 new this month
+            </span>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="bi bi-people"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Active Borrowers</h3>
+            <p>3</p>
+            <span class="trend neutral">
+              <i class="bi bi-dash"></i>
+              No change
+            </span>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="bi bi-clock-history"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Pending Returns</h3>
+            <p>2</p>
+            <span class="trend negative">
+              <i class="bi bi-arrow-down-right"></i>
+              1 overdue
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <div class="dashboard-grid">
+        <!-- Chart Section -->
+        <section class="chart-section">
+          <div class="section-header">
+            <h3>Book Activity Overview</h3>
+            <div class="chart-controls">
+              <select id="timeRange">
+                <option value="week">Last Week</option>
+                <option value="month" selected>Last Month</option>
+                <option value="year">Last Year</option>
+              </select>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </section>
+
+        <!-- Recent Activity Section -->
+        <section class="recent-activity">
+          <div class="section-header">
+            <h3>Recent Activity</h3>
+            <button class="view-all">View All</button>
+          </div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <i class="bi bi-person-check-fill"></i>
+              <div class="activity-details">
+                <p>New user registration: John Doe</p>
+                <span>2 minutes ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <i class="bi bi-book-fill"></i>
+              <div class="activity-details">
+                <p>"The Hobbit" was borrowed by Sarah Smith</p>
+                <span>1 hour ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <i class="bi bi-arrow-return-left"></i>
+              <div class="activity-details">
+                <p>"1984" was returned by Mike Johnson</p>
+                <span>3 hours ago</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Popular Categories Section -->
+        <section class="categories-section">
+          <div class="section-header">
+            <h3>Popular Categories</h3>
+          </div>
+          <div class="category-stats">
+            <div class="category-item">
+              <div class="category-info">
+                <span>Fiction</span>
+                <span>45%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress" style="width: 45%"></div>
+              </div>
+            </div>
+            <div class="category-item">
+              <div class="category-info">
+                <span>Science</span>
+                <span>30%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress" style="width: 30%"></div>
+              </div>
+            </div>
+            <div class="category-item">
+              <div class="category-info">
+                <span>History</span>
+                <span>25%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress" style="width: 25%"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Confirm Logout</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <i class="bi bi-question-circle"></i>
+        <p>Are you sure you want to log out?</p>
+      </div>
+      <div class="modal-buttons">
+        <button id="cancelLogout" class="cancel-btn">
+          <i class="bi bi-x"></i>
+          Cancel
+        </button>
+        <a href="login.html">
+          <button class="confirm-btn">
+            <i class="bi bi-box-arrow-right"></i>
+            Log Out
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Display current date
+    const dateElement = document.getElementById('currentDate');
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    dateElement.textContent = new Date().toLocaleDateString('en-US', options);
+
+    // Modal functionality
+    const modal = document.getElementById("logoutModal");
+    const logoutButton = document.getElementById("logoutButton");
+    const cancelButton = document.getElementById("cancelLogout");
+    const closeModal = document.querySelector(".close");
+
+    logoutButton.onclick = () => modal.style.display = "block";
+    closeModal.onclick = () => modal.style.display = "none";
+    cancelButton.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => {
+      if (event.target == modal) modal.style.display = "none";
+    }
+
+    // Chart configuration
+    const ctx = document.getElementById('lineChart').getContext('2d');
+    const lineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [
+          {
+            label: 'Books Borrowed',
+            data: [5, 10, 15, 20, 18, 25],
+            borderColor: '#FFA500',
+            backgroundColor: 'rgba(255, 165, 0, 0.1)',
+            borderWidth: 2,
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Books Returned',
+            data: [5, 8, 12, 10, 25, 10],
+            borderColor: '#4CAF50',
+            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+            borderWidth: 2,
+            tension: 0.4,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              color: '#fff',
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+            borderWidth: 1
+          }
+        },
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        },
+        scales: {
+          x: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: '#fff'
+            }
+          },
+          y: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: '#fff',
+              callback: function(value) {
+                return value + ' books';
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Time range selector functionality
+    document.getElementById('timeRange').addEventListener('change', function(e) {
+      const ranges = {
+        'week': { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+        'month': { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'] },
+        'year': { labels: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov'] }
+      };
+
+      const range = ranges[e.target.value];
+      lineChart.data.labels = range.labels;
+      
+      // Generate new random data
+      lineChart.data.datasets[0].data = Array.from({length: range.labels.length}, 
+        () => Math.floor(Math.random() * 30));
+      lineChart.data.datasets[1].data = Array.from({length: range.labels.length}, 
+        () => Math.floor(Math.random() * 30));
+      
+      lineChart.update();
+    });
+
+    // Handle window resize for chart responsiveness
+    window.addEventListener('resize', function() {
+      lineChart.resize();
+    });
+  </script>
+</body>
+</html>
