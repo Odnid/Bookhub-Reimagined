@@ -4,203 +4,596 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Hub - Book Statistics</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/dashboard_admin.css">
   <link rel="stylesheet" href="assets/css/bookstats.css">
   <link rel="icon" href="assets/img/bookhub.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <h1>Book <span class="highlight">hub</span></h1>
+      <div class="sidebar-header">
+        <i class="bi bi-book-half"></i>
+        <h1>Book<span class="highlight">hub</span></h1>
+      </div>
       <nav>
         <ul>
-          <a href="dashboard_admin.html"><li><strong>Dashboard</strong></li></a>
-          <a href="usermanagement.html"><li><strong>User Management</strong></li></a>
-          <li class="active"><strong>Book Statistics</strong></li>
+          <li>
+            <a href="dashboard_admin.html">
+              <i class="bi bi-grid-1x2-fill"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="usermanagement.html">
+              <i class="bi bi-people-fill"></i>
+              <span>User Management</span>
+            </a>
+          </li>
+          <li class="active">
+            <a href="bookstats.html">
+              <i class="bi bi-bar-chart-fill"></i>
+              <span>Book Statistics</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <div class="logout">
-        <button id="logoutButton"><strong>Logout</strong></button>
+        <button id="logoutButton">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Logout</span>
+        </button>
       </div>
     </aside>
 
     <!-- Main Content -->
     <main>
+      <header class="main-header">
+        <div class="header-content">
+          <h2>Book Statistics</h2>
+          <div class="date">
+            <i class="bi bi-calendar3"></i>
+            <span id="currentDate"></span>
+          </div>
+        </div>
+        <div class="search-bar">
+          <i class="bi bi-search"></i>
+          <input type="text" id="bookSearch" placeholder="Search books by title, author, or ID...">
+        </div>
+      </header>
+
+      <!-- Book Stats -->
         <section class="stats">
-          <a href="numberofborrower.html"><div class="stat-box">
-            <p class="h3">Most Popular <br>Book</p>
-            <p>The 100</p>
-          </a></div>
-          <a href="bookglossary.html"><div class="stat-box">
-            <p class="h3">Total Books in Library</p>
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="bi bi-book"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Total Books</h3>
             <p>30</p>
-          </a></div>
-          <a href="numberofborrower.html"><div class="stat-box">
-            <p class="h3">No. Of Borrowers</p>
+            <span class="trend positive">
+              <i class="bi bi-arrow-up-right"></i>
+              5 new this month
+            </span>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="bi bi-star"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Most Popular Book</h3>
+            <p>The 100</p>
+            <span class="trend positive">
+              <i class="bi bi-arrow-up-right"></i>
+              12 borrows
+            </span>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="bi bi-people"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Active Borrowers</h3>
             <p>3</p>
-          </a></div>
+            <span class="trend neutral">
+              <i class="bi bi-dash"></i>
+              No change
+            </span>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="bi bi-hourglass-split"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Avg. Borrow Time</h3>
+            <p>14 days</p>
+            <span class="trend negative">
+              <i class="bi bi-arrow-down-right"></i>
+              2 days less
+            </span>
+          </div>
+        </div>
         </section>
       
-        <!-- Table and Chart Container -->
-        <section class="table-chart-container">
-          <!-- Table for User Details -->
-          <table class="user-table">
+      <div class="dashboard-grid">
+        <!-- Book Inventory Table -->
+        <section class="book-inventory">
+          <div class="section-header">
+            <h3>Book Inventory</h3>
+            <div class="filter-group">
+              <select id="categoryFilter" class="filter-select">
+                <option value="all">All Categories</option>
+                <option value="fiction">Fiction</option>
+                <option value="science">Science</option>
+                <option value="history">History</option>
+              </select>
+              <button class="add-book-btn">
+                <i class="bi bi-plus-lg"></i>
+                Add Book
+              </button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="book-table">
             <thead>
               <tr>
+                  <th>
+                    <input type="checkbox" id="selectAll">
+                  </th>
                 <th>Book ID</th>
-                <th>Book Name</th>
+                  <th>Book Title</th>
+                  <th>Author</th>
+                  <th>Category</th>
                 <th>Quantity</th>
-                <th>Author</th>
-                <th>Issued Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr>
+                  <td>
+                    <input type="checkbox" class="book-select">
+                  </td>
                 <td>1111</td>
-                <td>Dindo 3000</td>
+                  <td>
+                    <div class="book-info">
+                      <img src="assets/img/book1.jpg" alt="Dindo 3000" class="book-cover">
+                      <div class="book-details">
+                        <span class="book-title">Dindo 3000</span>
+                        <span class="book-year">2022</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Guillian Dawal</td>
+                  <td><span class="badge category-fiction">Fiction</span></td>
                 <td>2</td>
-                <td>Guillian Dawal</td>
-                <td>20/11/2024</td>
+                  <td><span class="badge status-available">Available</span></td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="action-btn edit" title="Edit Book">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button class="action-btn view" title="View Details">
+                        <i class="bi bi-eye"></i>
+                      </button>
+                      <button class="action-btn delete" title="Delete Book">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </td>
               </tr>
               <tr>
+                  <td>
+                    <input type="checkbox" class="book-select">
+                  </td>
                 <td>1112</td>
-                <td>The 100</td>
+                  <td>
+                    <div class="book-info">
+                      <img src="assets/img/book2.jpg" alt="The 100" class="book-cover">
+                      <div class="book-details">
+                        <span class="book-title">The 100</span>
+                        <span class="book-year">2013</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Kass Morgan</td>
+                  <td><span class="badge category-science">Science Fiction</span></td>
                 <td>2</td>
-                <td>Kass Morgan</td>
-                <td>20/11/2024</td>
+                  <td><span class="badge status-borrowed">Borrowed</span></td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="action-btn edit" title="Edit Book">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button class="action-btn view" title="View Details">
+                        <i class="bi bi-eye"></i>
+                      </button>
+                      <button class="action-btn delete" title="Delete Book">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </td>
               </tr>
-              <!-- Add more rows here as needed -->
             </tbody>
           </table>
-      
-          <!-- Chart Section -->
-          <div class="chart-section">
-            <div class="chart-container">
-              <canvas id="donutChart" width="150" height="150"></canvas>
-              <div class="chart-labels">
-                <p><span class="yellow"></span> Available Books</p>
-                <p><span class="red"></span> Borrowed Books</p>
-            </div>
-            </div>
+          </div>
+          <div class="pagination">
+            <button class="page-btn" disabled>
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <span class="page-separator">...</span>
+            <button class="page-btn">10</button>
+            <button class="page-btn">
+              <i class="bi bi-chevron-right"></i>
+            </button>
           </div>
         </section>
-      </main>
-      
+
+        <!-- Charts Section -->
+        <div class="charts-container">
+          <!-- Book Status Chart -->
+          <section class="chart-section">
+            <div class="section-header">
+              <h3>Book Status Overview</h3>
+            </div>
+            <div class="chart-container">
+              <canvas id="bookStatusChart"></canvas>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <span class="legend-color" style="background-color: rgba(255, 165, 0, 0.7);"></span>
+                <span class="legend-label">Available</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background-color: rgba(76, 175, 80, 0.7);"></span>
+                <span class="legend-label">Borrowed</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background-color: rgba(244, 67, 54, 0.7);"></span>
+                <span class="legend-label">Overdue</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Category Distribution Chart -->
+          <section class="chart-section">
+            <div class="section-header">
+              <h3>Category Distribution</h3>
+            </div>
+            <div class="chart-container">
+              <canvas id="categoryChart"></canvas>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Book Modal -->
+  <div id="bookModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add New Book</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="bookForm" class="book-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookTitle">Book Title</label>
+              <input type="text" id="bookTitle" required>
+            </div>
+            <div class="form-group">
+              <label for="bookId">Book ID</label>
+              <input type="text" id="bookId" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookAuthor">Author</label>
+              <input type="text" id="bookAuthor" required>
+            </div>
+            <div class="form-group">
+              <label for="bookYear">Publication Year</label>
+              <input type="number" id="bookYear" min="1800" max="2099" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookCategory">Category</label>
+              <select id="bookCategory" required>
+                <option value="fiction">Fiction</option>
+                <option value="science">Science Fiction</option>
+                <option value="history">History</option>
+                <option value="biography">Biography</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bookQuantity">Quantity</label>
+              <input type="number" id="bookQuantity" min="1" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bookDescription">Description</label>
+            <textarea id="bookDescription" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="bookCover">Cover Image</label>
+            <input type="file" id="bookCover" accept="image/*">
+          </div>
+        </form>
+      </div>
+      <div class="modal-buttons">
+        <button class="cancel-btn">
+          <i class="bi bi-x"></i>
+          Cancel
+        </button>
+        <button class="confirm-btn" form="bookForm">
+          <i class="bi bi-check2"></i>
+          Save Book
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Delete Book</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <i class="bi bi-exclamation-triangle warning-icon"></i>
+        <p>Are you sure you want to delete this book? This action cannot be undone.</p>
+      </div>
+      <div class="modal-buttons">
+        <button class="cancel-btn">
+          <i class="bi bi-x"></i>
+          Cancel
+        </button>
+        <button class="delete-btn">
+          <i class="bi bi-trash"></i>
+          Delete Book
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- Logout Confirmation Modal -->
   <div id="logoutModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Are you sure you want to log out?</h2>
+      <div class="modal-header">
+        <h2>Confirm Logout</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="question-icon">
+          <i class="bi bi-question-circle"></i>
+        </div>
+        <p>Are you sure you want to log out?</p>
+      </div>
       <div class="modal-buttons">
-        <button id="cancelLogout" class="cancel-btn">Cancel</button>
-        <a href="login.html"><button class="confirm-btn">Log Out</button></a>
+        <button id="cancelLogout" class="cancel-btn">
+          <i class="bi bi-x"></i>
+          Cancel
+        </button>
+        <a href="login.html" style="flex: 1; text-decoration: none;">
+          <button class="confirm-btn" style="width: 100%;">
+            <i class="bi bi-box-arrow-right"></i>
+            Log Out
+          </button>
+        </a>
       </div>
     </div>
   </div>
 
   <script>
-    // Get the modal and buttons
-    var modal = document.getElementById("logoutModal");
-    var logoutButton = document.getElementById("logoutButton");
-    var cancelButton = document.getElementById("cancelLogout");
-    var closeModal = document.querySelector(".close");
+    // Display current date
+    const dateElement = document.getElementById('currentDate');
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    dateElement.textContent = new Date().toLocaleDateString('en-US', options);
 
-    // When the user clicks the logout button, show the modal
-    logoutButton.onclick = function() {
+    // Modal functionality
+    const modals = {
+      book: document.getElementById("bookModal"),
+      delete: document.getElementById("deleteModal"),
+      logout: document.getElementById("logoutModal")
+    };
+
+    const buttons = {
+      addBook: document.querySelector(".add-book-btn"),
+      editBook: document.querySelectorAll(".action-btn.edit"),
+      deleteBook: document.querySelectorAll(".action-btn.delete"),
+      logout: document.getElementById("logoutButton"),
+      cancelLogout: document.getElementById("cancelLogout")
+    };
+
+    // Generic modal handler
+    function handleModal(modalId, action) {
+      const modal = modals[modalId];
+      const closeBtn = modal.querySelector(".close");
+      const cancelBtn = modal.querySelector(".cancel-btn");
+
+      if (action === 'open') {
       modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    closeModal.onclick = function() {
-      modal.style.display = "none";
-    }
-
-    // When the user clicks "Cancel", close the modal
-    cancelButton.onclick = function() {
-      modal.style.display = "none";
-    }
-
-    // When the user clicks outside the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
+      } else {
         modal.style.display = "none";
       }
+
+      closeBtn.onclick = () => modal.style.display = "none";
+      cancelBtn.onclick = () => modal.style.display = "none";
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-  const canvas = document.getElementById("donutChart");
-  const ctx = canvas.getContext("2d");
+    // Event Listeners
+    buttons.addBook.onclick = () => handleModal('book', 'open');
+    buttons.editBook.forEach(btn => {
+      btn.onclick = () => handleModal('book', 'open');
+    });
+    buttons.deleteBook.forEach(btn => {
+      btn.onclick = () => handleModal('delete', 'open');
+    });
+    buttons.logout.onclick = () => handleModal('logout', 'open');
 
-  // Data for the chart
-  const totalBooks = 30;
-  const borrowedBooks = 3;
-  const availableBooks = totalBooks - borrowedBooks;
+    // Close modals when clicking outside
+    window.onclick = (event) => {
+      Object.values(modals).forEach(modal => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    };
 
-  const data = [availableBooks, borrowedBooks];
-  const colors = ["#ff9500", "red"]; // Colors for the slices
+    // Select all functionality
+    const selectAllCheckbox = document.getElementById('selectAll');
+    const bookCheckboxes = document.querySelectorAll('.book-select');
 
-  // Animation settings
-  const animationDuration = 1000; // Animation duration in milliseconds
-  const animationSteps = 60; // Number of animation frames
-  const interval = animationDuration / animationSteps; // Time between frames
+    selectAllCheckbox.addEventListener('change', function() {
+      bookCheckboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+      });
+    });
 
-  let currentStep = 0;
+    // Search functionality
+    const searchInput = document.getElementById('bookSearch');
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const rows = document.querySelectorAll('.book-table tbody tr');
+      
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(searchTerm) ? '' : 'none';
+      });
+    });
 
-  // Function to draw the chart for the current progress
-  function drawChart(progress) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Filter functionality
+    const categoryFilter = document.getElementById('categoryFilter');
+    categoryFilter.addEventListener('change', function() {
+      const category = this.value;
+      const rows = document.querySelectorAll('.book-table tbody tr');
+      
+      rows.forEach(row => {
+        if (category === 'all') {
+          row.style.display = '';
+        } else {
+          const bookCategory = row.querySelector('.badge[class*="category-"]').textContent.toLowerCase();
+          row.style.display = bookCategory.includes(category) ? '' : 'none';
+        }
+      });
+    });
 
-    let startAngle = 0;
+    // Book Status Chart
+    const statusCtx = document.getElementById('bookStatusChart').getContext('2d');
+    const statusChart = new Chart(statusCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Available', 'Borrowed', 'Overdue'],
+        datasets: [{
+          data: [25, 3, 2],
+          backgroundColor: [
+            'rgba(255, 165, 0, 0.7)',
+            'rgba(76, 175, 80, 0.7)',
+            'rgba(244, 67, 54, 0.7)'
+          ],
+          borderColor: [
+            'rgba(255, 165, 0, 1)',
+            'rgba(76, 175, 80, 1)',
+            'rgba(244, 67, 54, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percentage = Math.round((value / total) * 100);
+                return `${label}: ${value} books (${percentage}%)`;
+              }
+            }
+          }
+        },
+        cutout: '70%'
+      }
+    });
 
-    for (let i = 0; i < data.length; i++) {
-      const sliceValue = data[i];
-      const sliceAngle = (sliceValue / totalBooks) * 2 * Math.PI * progress;
-
-      // Draw the slice
-      ctx.beginPath();
-      ctx.moveTo(canvas.width / 2, canvas.height / 2);
-      ctx.arc(
-        canvas.width / 2,
-        canvas.height / 2,
-        canvas.width / 2,
-        startAngle,
-        startAngle + sliceAngle
-      );
-      ctx.closePath();
-      ctx.fillStyle = colors[i];
-      ctx.fill();
-
-      startAngle += sliceAngle;
-    }
-
-    // Draw the inner circle for the donut effect
-    ctx.beginPath();
-    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 4, 0, 2 * Math.PI);
-    ctx.fillStyle = "black"; // Inner circle color
-    ctx.fill();
-  }
-
-  // Animation loop
-  function animateChart() {
-    currentStep++;
-    const progress = currentStep / animationSteps;
-
-    drawChart(progress);
-
-    if (currentStep < animationSteps) {
-      requestAnimationFrame(animateChart);
-    }
-  }
-
-  // Start the animation
-  animateChart();
-});
-
-
-
-
+    // Category Distribution Chart
+    const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+    const categoryChart = new Chart(categoryCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Fiction', 'Science Fiction', 'History', 'Biography', 'Fantasy'],
+        datasets: [{
+          label: 'Number of Books',
+          data: [12, 8, 5, 3, 2],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: '#fff'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#fff'
+            }
+          }
+        }
+      }
+    });
   </script>
 </body>
 </html>

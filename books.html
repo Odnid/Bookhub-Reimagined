@@ -86,7 +86,7 @@
             <input type="text" placeholder="Search books...">
           </div>
           <div class="user-menu">
-            <img src="assets/img/default-avatar.png" alt="User" class="avatar">
+            <img src="assets/img/dindo.jpg" alt="User" class="avatar">
             <i class="bi bi-bell notification-icon"></i>
           </div>
         </div>
@@ -112,7 +112,7 @@
         <!-- Book Card Template -->
         <div class="book-card">
           <div class="book-cover">
-            <img src="assets/img/books/gatsby.jpg" alt="The Great Gatsby">
+            <img src="assets/img/hp.jpg" alt="The Great Gatsby">
             <div class="book-actions">
               <button class="action-btn"><i class="bi bi-heart"></i></button>
               <button class="action-btn"><i class="bi bi-arrow-left-right"></i></button>
@@ -138,12 +138,8 @@
     </main>
   </div>
 
+  <script src="assets/js/logout.js"></script>
   <script>
-    // Logout functionality
-    document.getElementById('logoutBtn').addEventListener('click', function() {
-      window.location.href = 'login.html';
-    });
-
     // Search functionality
     const searchInput = document.querySelector('.search-bar input');
     searchInput.addEventListener('input', function(e) {
@@ -167,14 +163,15 @@
         // Handle different actions (favorite, borrow, more options)
       });
     });
-    document.addEventListener('DOMContentLoaded', function() {
-  const hamburger = document.querySelector('.hamburger-menu');
-  const sidebar = document.querySelector('.sidebar');
 
-  hamburger.addEventListener('click', function() {
-    sidebar.classList.toggle('active');
-  });
-});
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.querySelector('.hamburger-menu');
+      const sidebar = document.querySelector('.sidebar');
+
+      hamburger.addEventListener('click', function() {
+        sidebar.classList.toggle('active');
+      });
+    });
   </script>
 </body>
 </html>

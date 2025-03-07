@@ -309,16 +309,17 @@
     </main>
   </div>
 
+  <script src="assets/js/logout.js"></script>
   <script>
-    // Logout functionality
-    document.getElementById('logoutBtn').addEventListener('click', function() {
-      window.location.href = 'index.html';
-    });
-
     // Sidebar toggle functionality
     document.querySelector('.hamburger-menu').addEventListener('click', function() {
       document.querySelector('.sidebar').classList.toggle('collapsed');
       document.querySelector('.main-content').classList.toggle('expanded');
+    });
+
+    // Profile picture upload functionality
+    document.querySelector('.edit-pic').addEventListener('click', function() {
+      // Implement profile picture upload
     });
   </script>
 </body>

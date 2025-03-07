@@ -1,19 +1,12 @@
 <?php
+require "./backend/includes/functions.php";
+
 session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
+if(!isUser() || !isAdmin()){
+  redirect(' 401.php');
 }
 
-// Restrict access to members only
-if ($_SESSION['role'] !== 'user') {
-    header("Location: unauthorized.php"); // Redirect to an unauthorized access page
-    exit();
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -213,12 +206,8 @@ if ($_SESSION['role'] !== 'user') {
     </main>
   </div>
 
+  <script src="assets/js/logout.js"></script>
   <script>
-    // Logout functionality
-    document.getElementById('logoutBtn').addEventListener('click', function() {
-      window.location.href = 'logout.php';
-    });
-
     // Search functionality
     const searchInput = document.querySelector('.search-bar input');
     searchInput.addEventListener('input', function(e) {
